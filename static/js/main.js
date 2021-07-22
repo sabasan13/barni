@@ -1,6 +1,7 @@
 "use strict";
 
 $('.checks-wrapper').mCustomScrollbar();
+$('.winners-wrapper').mCustomScrollbar();
 
 function OpenPopup(popupId) {
   $('body').removeClass('no-scrolling');
@@ -67,3 +68,26 @@ $('.anime-item.unactive').click(function () {
     $(this).removeClass('active');
   }
 });
+
+if ($('.select').length > 1) {
+  $('select').each(function () {
+    var $this = $(this).not('.select-search');
+    var parent = $(this).not('.select-search').parents('.select');
+    $this.select2({
+      minimumResultsForSearch: Infinity,
+      dropdownParent: parent
+    });
+  });
+  $('.select-search').each(function () {
+    var $this = $(this);
+    var parent = $(this).parents('.select');
+    $this.select2({
+      dropdownParent: parent
+    });
+  });
+} else {
+  $('select').select2({
+    minimumResultsForSearch: Infinity,
+    dropdownParent: $('.select')
+  });
+}
